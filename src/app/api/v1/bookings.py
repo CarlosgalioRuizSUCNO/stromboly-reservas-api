@@ -3,11 +3,11 @@ from fastapi import APIRouter, Depends, HTTPException, status, Query
 from sqlalchemy.orm import Session
 from sqlalchemy import and_, or_
 
-from src.app.db.session import get_db
-from src.app.models.booking import Booking as BookingModel
-from src.app.models.room import Room as RoomModel
-from src.app.models.customer import Customer as CustomerModel
-from src.app.schemas.booking import Booking, BookingCreate
+from app.db.session import get_db
+from app.models.booking import Booking as BookingModel
+from app.models.room import Room as RoomModel
+from app.models.customer import Customer as CustomerModel
+from app.schemas.booking import Booking, BookingCreate
 
 router = APIRouter()
 

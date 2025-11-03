@@ -1,23 +1,24 @@
-# Dockerfile para ejecución de la API con Uvicorn
+# Imagen base
 FROM python:3.12-slim
 
+# Configuración de Python
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
+# Crear y usar directorio de trabajo
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y --no-install-recommends && rm -rf /var/lib/apt/lists/*
-
+# Instalar dependencias
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copiar el código fuente al contenedor
-COPY src ./src
+# Copiar todo el código fuente al contenedor
+COPY . .
 
-# 🔹 Agregar esta línea para que Python reconozca la carpeta src
-ENV PYTHONPATH="${PYTHONPATH}:/app"
+# 🔹 Añadir /app/src al PYTHONPATH directamente
+ENV PYTHONPATH="/app/src"
 
 EXPOSE 8080
 
-CMD ["uvicorn", "src.app.main:app", "--host", "0.0.0.0", "--port", "8080"]
-
+# Comando de inicio
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]

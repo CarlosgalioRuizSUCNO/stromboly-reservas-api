@@ -1,7 +1,7 @@
 from fastapi import FastAPI
-from src.app.api.v1 import rooms as rooms_router
-from src.app.api.v1 import customers as customers_router
-from src.app.api.v1 import bookings as bookings_router  # <-- NUEVO
+from app.api.v1 import rooms as rooms_router
+from app.api.v1 import customers as customers_router
+from app.api.v1 import bookings as bookings_router  # <-- NUEVO
 
 # 🔹 Inicialización de la app
 app = FastAPI(
@@ -11,8 +11,8 @@ app = FastAPI(
 )
 
 # 🔹 Crear las tablas en el arranque
-from src.app.db.session import engine
-from src.app.db.base import Base
+from app.db.session import engine
+from app.db.base import Base
 
 @app.on_event("startup")
 def init_db():
